@@ -129,12 +129,13 @@ export default class BaseChart {
 	}
 
 	bind_window_events() {
-		window.addEventListener('resize', () => this.refresh());
-		window.addEventListener('orientationchange', () => this.refresh());
+		var r = () => this.refresh();
+		window.addEventListener('resize', r);
+		window.addEventListener('orientationchange', r);
 
 		document.addEventListener('turbolinks:before-render', function(){
-			window.removeEventListener('resize', () => this.refresh());
-			window.removeEventListener('orientationchange', () => this.refresh());
+			window.removeEventListener('resize', r);
+			window.removeEventListener('orientationchange', r);
 		});
 	}
 
