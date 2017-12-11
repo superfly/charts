@@ -1026,6 +1026,11 @@ class BaseChart {
 	bind_window_events() {
 		window.addEventListener('resize', () => this.refresh());
 		window.addEventListener('orientationchange', () => this.refresh());
+
+		document.addEventListener('turbolinks:before-render', function(){
+			window.removeEventListener('resize', () => this.refresh());
+			window.removeEventListener('orientationchange', () => this.refresh());
+		});
 	}
 
 	refresh(init=false) {
